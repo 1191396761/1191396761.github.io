@@ -1,0 +1,249 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Android | Celia的赛博据点</title><meta name="author" content="Celia"><meta name="copyright" content="Celia"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="基于安卓面经_安卓基础面全解析(1&#x2F;30)Activity全解析进行补充 Activity是Android四大组件之一，是面试官最喜欢问的。如果面试官问你：  请介绍Activity的生命周期？⭐⭐⭐⭐⭐ 请介绍Activity的启动模式？⭐⭐⭐⭐ 请说下切换横竖屏时 Activity的生命周期变化？⭐⭐⭐⭐ 请介绍Activity的启动流程？（进阶题）⭐⭐⭐⭐ 请介绍Android应用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android">
+<meta property="og:url" content="https://1191396761.github.io/2024/05/26/Activity/index.html">
+<meta property="og:site_name" content="Celia的赛博据点">
+<meta property="og:description" content="基于安卓面经_安卓基础面全解析(1&#x2F;30)Activity全解析进行补充 Activity是Android四大组件之一，是面试官最喜欢问的。如果面试官问你：  请介绍Activity的生命周期？⭐⭐⭐⭐⭐ 请介绍Activity的启动模式？⭐⭐⭐⭐ 请说下切换横竖屏时 Activity的生命周期变化？⭐⭐⭐⭐ 请介绍Activity的启动流程？（进阶题）⭐⭐⭐⭐ 请介绍Android应用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://1191396761.github.io/img/85968512_p0.jpg">
+<meta property="article:published_time" content="2024-05-25T20:00:18.000Z">
+<meta property="article:modified_time" content="2024-05-25T20:07:38.853Z">
+<meta property="article:author" content="Celia">
+<meta property="article:tag" content="Android app">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://1191396761.github.io/img/85968512_p0.jpg"><link rel="shortcut icon" href="/img/favicon2.jpeg"><link rel="canonical" href="https://1191396761.github.io/2024/05/26/Activity/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Android',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-05-26 04:07:38'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.1.1"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/85968512_p0.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/111639477_p0.png')"><nav id="nav"><span id="blog-info"><a href="/" title="Celia的赛博据点"><span class="site-name">Celia的赛博据点</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Android</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-05-25T20:00:18.000Z" title="发表于 2024-05-26 04:00:18">2024-05-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-05-25T20:07:38.853Z" title="更新于 2024-05-26 04:07:38">2024-05-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Android/">Android</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Android"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><em>基于<a target="_blank" rel="noopener" href="https://www.nowcoder.com/issue/tutorial?zhuanlanId=80aJVm&uuid=135361561f6b418599efaa0e9620bafb">安卓面经_安卓基础面全解析(1&#x2F;30)Activity全解析</a>进行补充</em></p>
+<p>Activity是Android四大组件之一，是面试官最喜欢问的。如果面试官问你：</p>
+<ol>
+<li>请介绍Activity的生命周期？⭐⭐⭐⭐⭐</li>
+<li>请介绍Activity的启动模式？⭐⭐⭐⭐</li>
+<li>请说下切换横竖屏时 Activity的生命周期变化？⭐⭐⭐⭐</li>
+<li>请介绍Activity的启动流程？（进阶题）⭐⭐⭐⭐</li>
+<li>请介绍Android应用程序的启动流程？（进阶题）⭐⭐⭐⭐</li>
+</ol>
+<p>看完以下几点回答，一定可以让面试官眼前一亮。</p>
+<h2 id="1、什么是Activity"><a href="#1、什么是Activity" class="headerlink" title="1、什么是Activity"></a>1、什么是Activity</h2><p>Activity（活动）是一个为实现交互而提供的Android应用组件。每个Activity都有一个窗口，该窗口可以全屏幕填充，也可以是一个小窗口浮动在其他窗口上。一个应用程序通常由多个Activity组成，它会指定应用程序中的某个Activity作为主Activity，这意味着当用户第一次启动应用程序时呈现给用户的活动，并且Activity可以相互跳转来执行不同的操作。</p>
+<p>描述2:  Activity是什么?<br>   是安卓中一个可以被用户看见和操作的界面, 它是用户界面和用户交互的桥梁,可以将Activity视作一种窗口,  是安卓中最重要和核心的组件之一. 一个app中可以有多个Activity, 每个Activity都有自己的生命周期和所显示的不同界面.</p>
+<h2 id="2、Activity的生命周期"><a href="#2、Activity的生命周期" class="headerlink" title="2、Activity的生命周期"></a>2、Activity的生命周期</h2><p>先上一个官方图：<br>![](D:\Program Files\Blog\source_posts\img\Pasted image 20240325103549.png)</p>
+<p>在正常情况下，一个Activity从启动到结束会以如下顺序经历整个生命周期： onCreate()-&gt;onStart()-&gt;onResume()-&gt;onPause()-&gt;onStop()-&gt;onDestory()。包含了六个部分，还有一个onRestart()没有调用，我们先介绍这六部分内容，因为这六部分 <strong>两两对应</strong>。 初学者可以将这六部分这么记：创建一个活动-&gt;可以见到该活动显示在屏幕-&gt;该活动可以触摸操作-&gt;该活动停止，不可以操作-&gt;该活动从屏幕上消失，看不到了-&gt;该活动销毁。这六个步骤就和上面六个函数一一对应。</p>
+<p>(1) onCreate():<strong>创建</strong>：在onCreate()生命周期中, 创建一个Activity, 绑定布局, 此时<strong>界面不可见</strong>, 我们通常在该生命周期中做初始化工作，比如加载接口布局资源和初始化活动所需的数据。</p>
+<p>(2) onStart():<strong>开始</strong>：表示Activity正在启动，并且即将启动。此时Activity已经出现，但还没有出现在前台，我们还不能交互。<strong>可见不可操作</strong></p>
+<p>(3) onResume():<strong>活动</strong>：表示Activity已经出现在前台，<strong>可见可操作</strong>。</p>
+<p>(4) onPause():<strong>暂停</strong>：表示活动即将停止，<strong>仍然可见,但是不能操作了</strong>。</p>
+<p>(5) onStop():<strong>停止</strong>：表示<strong>活动停止，此时不可见，位于后台</strong>。</p>
+<p>(6) onDestory():<strong>销毁</strong>：表示活动即将被销毁。这是Activity循环的最后一个回调。你可以做一些回收工作和最后的资源回收。</p>
+<p>最后介绍第七个生命周期onRestart：</p>
+<p>(7) OnRestart():表示Activity重启。在正常情况下，当Activity从不可见状态切换到可见状态，也就是<strong>onStop()到onStart()之间</strong>，就会调用OnRestart()。这种情况一般是由用户行为引起的。例如，用户在这个活动切换到桌面或打开另一个新的活动，然后用户返回到这个活动。</p>
+<h3 id="2-1-生命周期的几种常见情况"><a href="#2-1-生命周期的几种常见情况" class="headerlink" title="2.1 生命周期的几种常见情况"></a>2.1 生命周期的几种常见情况</h3><p>①启动ActivityA：onCreate()-&gt;onStart()-&gt;onResume()</p>
+<p>②打开新的ActiviyB的时候，上述ActivityA的回调如下：onPause()-&gt;onStop()</p>
+<p>③接着再次回到原ActivityA时，ActivityA的回调如下：onRestart()-&gt;onStart()-&gt;onResume()</p>
+<p>④按back键回退ActivityA时，ActivityA的回调如下：onPause()-&gt;onStop()-&gt;onDestory()</p>
+<p>⑤在第四个步骤不按back，而是按Home键切换到桌面后又回到该ActitiyA，ActivityA的回调如下：onPause()-&gt;onStop()-&gt;<strong>onRestart()</strong>-&gt;onStart()-&gt;onResume()</p>
+<p>⑥调用finish()方法后，ActivityA的回调如下：onDestory()</p>
+<h2 id="3、切换横竖屏时，Activity的生命周期变化"><a href="#3、切换横竖屏时，Activity的生命周期变化" class="headerlink" title="3、切换横竖屏时，Activity的生命周期变化"></a>3、切换横竖屏时，Activity的生命周期变化</h2><p>正常情况下，切换横竖屏后，Activity会被销毁并重新创建，然而大部分情况，我们并不希望重新走一遍生命周期。那么我们来看看以下几种情况：</p>
+<h3 id="3-1-正常情况"><a href="#3-1-正常情况" class="headerlink" title="3.1 正常情况"></a>3.1 正常情况</h3><p>重新走一遍生命周期：onPause()-&gt;<a target="_blank" rel="noopener" href="https://blog.csdn.net/litao55555/article/details/120118995">onSaveInstanceState()</a>-&gt; onStop()-&gt;onDestroy()-&gt;onCreate()-&gt;onStart()-&gt;onRestoreInstanceState-&gt;onResume()</p>
+<p>其中<strong>onSaveInstanceState和onRestoreInstanceState</strong>是两个重要的回调函数。当Activity异常退出时，系统调用onSaveInstanceState()来保存Activity当前状态。同样的，当该Activity重新创建时，会调用onRestoreInstanceState()来恢复之前的状态。</p>
+<p><strong>onSaveInstanceState(Bundle outState)</strong><br>保存Acticivity被销毁前的状态：在离开页面的时候用onSaveInstanceState中的outState可以保存你所需要的值, <em>在OnStop之前执行</em></p>
+<p><strong>onRestoreInstanceState(Bundle savedInstanceState)</strong><br>恢复Acticivity被销毁前的状态：在重新回到该页面的时候可以使用onRestoreInstanceState从saveInstanceState中获取保存过得值来重新初始化界面, <em>在OnStart后执行</em></p>
+<p>onSaveInstanceState是在OnStop之前执行，onRestoreInstanceState在OnStart后执行<br><em>注意：onSaveInstanceState()是用来保存UI状态，onPause()适合用于数据的持久化保存</em></p>
+<h3 id="3-2-配置-android-configChanges"><a href="#3-2-配置-android-configChanges" class="headerlink" title="3.2 配置 android:configChanges"></a>3.2 配置 android:configChanges</h3><p>可以通过在AndroidManifest里配置android:configChanges，来避免切换横竖屏时Activity重新走生命周期。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:configChanges = &quot;orientation| screenSize&quot;</span><br></pre></td></tr></table></figure>
+
+<p>此时切屏不会重新调用各个生命周期，只会执行onConfigurationChanged方法，在该方法就可以执行其他动作啦。</p>
+<p>注意：设置Activity的android:configChanges&#x3D;”orientation”时，切屏还是会调用各个生命周期，切换横竖屏只会执行一次。# 3、切换横竖屏时，Activity的生命周期变化</p>
+<h2 id="4、Activity的启动模式"><a href="#4、Activity的启动模式" class="headerlink" title="4、Activity的启动模式"></a>4、Activity的启动模式</h2><p>一个应用程序一般包含多个Activity，多个Activity的管理是按照每个Acitivity打开的顺序排列在返回栈（Back Stack）中，并遵循“后进先出”的规则。通常情况下，当前一个ActivityA启动一个新的ActivityB时候，新的ActivityB会被加入返回栈中，并处于栈顶，获取屏幕焦点，而前一个ActivityA仍保留在返回栈中，处于停止(onStop)状态。 ActivityA停止时，如上所说，系统会调用onSaveInstanceState和onRestoreInstanceState保存其页面状态。当用户返回时候，当前处于栈顶的ActivityB会从返回栈中弹出，并被销毁(onDestroy)，恢复前一个ActivityA的状态。</p>
+<h3 id="4-1-四大启动模式"><a href="#4-1-四大启动模式" class="headerlink" title="4.1 四大启动模式"></a>4.1 四大启动模式</h3><p>上一段讲述的正是最常见的默认启动模式：Standard（标准模式），四大启动模式分别是：</p>
+<ol>
+<li>Standard：标准模式</li>
+<li>SingleTop:栈顶复用模式&#x2F;单顶模式</li>
+<li>SingleTask:栈内复用模式&#x2F;单任务模式</li>
+<li>SingleInstance:单例模式</li>
+</ol>
+<h4 id="Standard-标准模式"><a href="#Standard-标准模式" class="headerlink" title="Standard 标准模式"></a>Standard 标准模式</h4><p>默认的启动模式，新启动的Activity放入返回栈栈顶，遵循先进后出原则，同一个Activity可以被实例化多次。</p>
+<h4 id="singleTop-栈顶复用模式"><a href="#singleTop-栈顶复用模式" class="headerlink" title="singleTop 栈顶复用模式"></a>singleTop 栈顶复用模式</h4><p>singleTop启动模式称之为栈顶复用模式。就是说如果当前这个Activity实例处于栈顶那么就直接复用无需在栈内再生成这个实例。如果Activity不在栈顶则会重新创建，那么其实就相当于standard启动模式。<br>进一步思考，如果同一个ActivityA被实例化5次，那么栈顶就有5个ActivityA，但我们希望如果栈顶已经是ActivityA时，新创建一个ActivityA就不要重新实例化新的ActivityA，而是用此时栈顶的ActivityA。那么就可以用SingleTop模式，分为下面两种情况：</p>
+<ul>
+<li>如果当前返回栈的顶部不存在该Activity，则新建该Activity并放入栈顶；</li>
+<li>如果当前返回栈的顶部已存在Activity的一个实例，则系统会通过调用该实例的onNewIntent()方法向其传送Intent，不创建该Activity的新实例。</li>
+<li>(执行onNewIntent(),不会执行onCreate()、onStart()。)</li>
+</ul>
+<h4 id="singleTask-栈内单例模式"><a href="#singleTask-栈内单例模式" class="headerlink" title="singleTask 栈内单例模式"></a>singleTask 栈内单例模式</h4><p>singleTask启动模式称之为栈内单例模式。Activity如果设置了singleTask启动模式，那么该Activity在栈内只能有一个实例，只是如果该Activity不处于栈顶则把该Activity之上的其它Activity的实例从栈内移出，该Activity处于栈顶。如果该Activity本身就处于栈顶直接复用(可以看成是singleTop模式)。</p>
+<p>单任务模式就是指一个栈里面只有一个指定的Activity。而且通常会和taskAffinity配合使用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;activity android:name=<span class="string">&quot;ActivityA&quot;</span></span><br><span class="line">	android:launchMode=<span class="string">&quot;singleTask&quot;</span></span><br><span class="line">	android:taskAffinity=<span class="string">&quot;com.android.task&quot;</span></span><br><span class="line">&lt;/activity&gt;</span><br></pre></td></tr></table></figure>
+
+<p>affinity就是亲和力的意思，我们可以设置希望ActivityA在com.android.task这个栈里打开，那么就分为以下3种情况：</p>
+<ul>
+<li>如果com.android.task返回栈不存在，系统会新建新的返回栈，然后再创建该ActivityA的实例将其压入返回栈中；</li>
+<li>如果com.android.task返回栈存在，而且返回栈中没有该ActivityA，则新建Activity A并放入栈顶；</li>
+<li>如果com.android.task返回栈存在，而且返回栈中已经有该ActivityA，则重新启动Activity，调用的顺序为：<code>onNewIntent()-&gt;onRestart()-&gt;onStart()-&gt;onResume()</code>，且进一步分为以下两种情况：<ul>
+<li>如果该ActivityA在栈顶，则不做处理；</li>
+<li>如果该ActivityA不在栈顶，会弹出其上面的所有Activity，让该ActivityA置于栈顶（返回栈中的Activity永远不会重新排列，弹出的其他Activity无法恢复）；</li>
+</ul>
+</li>
+</ul>
+<p>注意：如果只是指定了android:taskAffinity属性，但是启动模式没有指定为Singletask模式，新启动的Activity依然会在原来的返回栈中。</p>
+<h4 id="SingleInstance-堆内单例模式"><a href="#SingleInstance-堆内单例模式" class="headerlink" title="SingleInstance 堆内单例模式"></a>SingleInstance 堆内单例模式</h4><p>单独开辟一个任务栈只存该实例。</p>
+<p>这是Singletask的升级版，创建SingleInstance启动模式的Activity时，系统都会直接创建一个新的返回栈并创建Activity的新实例置于新Task返回栈中，有两点要注意：</p>
+<ul>
+<li>之后系统不会将任何其他Activity的实例放入这个新建的Task中，该Activity始终是其Task唯一仅有的成员；</li>
+<li>一旦该模式的Activity实例已经存在于某个栈中，任何应用再激活该Activity时都会重用该栈中的实例。</li>
+</ul>
+<p>很重要的一点(面试常问)：在singleTop(处于栈顶的时候)、singleTask、singleInstance中如果Activity实例已经存在，当再次调用startActivity跳转该页面时会执行onNewIntent(),不会执行onCreate()、onStart()。</p>
+<h3 id="4-2-进阶题：谈谈四大启动模式对应的使用场景"><a href="#4-2-进阶题：谈谈四大启动模式对应的使用场景" class="headerlink" title="4.2 进阶题：谈谈四大启动模式对应的使用场景"></a>4.2 进阶题：谈谈四大启动模式对应的使用场景</h3><p><strong>standard 标准模式</strong><br>Activity没有特殊要求时可以默认。</p>
+<p><strong>singleTop 栈顶复用模式</strong><br>适合应用于一些推送相关的页面和一些商品详情页。<br>比如我们app对接的推送通知。可能会收到很多推送，如果我们点击进去进入的页面相同只是内容不同只需要通过Intent传入相应的内容即可。<br>很多电商类的App,商品列表点击进去是商品详情页，商品详情页下面又有商品列表点进去还是商品详情页。<br>所以这两种情况singleTop就非常合适了。</p>
+<p><strong>singleTask 栈内单例模式</strong><br>singleTask最常使用的就是一个APP的首页。因为一般为一个APP的第一个页面，且长时间保留在栈中，所以最适合设置singleTask启动模式来复用。</p>
+<p><strong>singleInstance 堆内单例模式</strong><br>singleInstance比较常见于调用一些系统方法，因为一个应用中我们只能保留一个实例，并单独存在一个任务栈中，所以只要需要直接复用即可。比如调用系统打电话、闹钟、日历。</p>
+<h3 id="4-3-如何设置启动模式"><a href="#4-3-如何设置启动模式" class="headerlink" title="4.3 如何设置启动模式"></a>4.3 如何设置启动模式</h3><p>我们可以通过在AndroidManifest.xml配置Activity的启动模式。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">android:launchMode=&quot;standard&quot; </span><br></pre></td></tr></table></figure>
+
+<p>或者直接在代码里设置：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Intent</span> <span class="variable">intent</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Intent</span>(<span class="built_in">this</span>, MyActivity.class); </span><br><span class="line">intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);</span><br><span class="line">startActivity(intent);</span><br></pre></td></tr></table></figure>
+
+<p>注：第二种方法设置启动模式的优先级高于第一种，如果两者都存在，以第二种为准。</p>
+<h2 id="背面试题版本"><a href="#背面试题版本" class="headerlink" title="背面试题版本"></a>背面试题版本</h2><h4 id="1-Activity是什么"><a href="#1-Activity是什么" class="headerlink" title="1. Activity是什么?"></a>1. Activity是什么?</h4><p>是安卓中一个可以被用户看见和操作的界面, 它是用户界面和用户交互的桥梁,可以将Activity视作一种窗口,  是安卓中最重要和核心的组件之一. 一个app中可以有多个Activity, 每个Activity都有自己的生命周期和所显示的不同界面.</p>
+<h4 id="2-生命周期"><a href="#2-生命周期" class="headerlink" title="2. 生命周期"></a>2. 生命周期</h4><p>以打开一个Activity举例</p>
+<p>刚刚打开一个Activity时, 会开始创建 …….</p>
+<p>如果要退出 …..</p>
+<p>如果没有退出, 而是切到后台….. 再切回来……</p>
+<h4 id="3-四大启动模式"><a href="#3-四大启动模式" class="headerlink" title="3. 四大启动模式"></a>3. 四大启动模式</h4><h4 id="4-面试题1-横竖屏"><a href="#4-面试题1-横竖屏" class="headerlink" title="4. 面试题1: 横竖屏"></a>4. 面试题1: 横竖屏</h4><h4 id="5-面试题2-从Activity-A跳转到Activity-B-所走的生命周期"><a href="#5-面试题2-从Activity-A跳转到Activity-B-所走的生命周期" class="headerlink" title="5. 面试题2: 从Activity A跳转到Activity B, 所走的生命周期"></a>5. 面试题2: 从Activity A跳转到Activity B, 所走的生命周期</h4><p>两个Activity(A-&gt;B)切换(B正常的Activity)的生命周期:onPause(A) -&gt; onCreate(B) -&gt; onStart(B) -&gt; onResume(B) -&gt; oStop(A)</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://1191396761.github.io">Celia</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://1191396761.github.io/2024/05/26/Activity/">https://1191396761.github.io/2024/05/26/Activity/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://1191396761.github.io" target="_blank">Celia的赛博据点</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Android-app/">Android app</a></div><div class="post_share"><div class="social-share" data-image="/img/85968512_p0.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/05/26/Service/" title="Service"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Service</div></div></a></div><div class="next-post pull-right"><a href="/2024/05/26/Android%20App%E5%BC%80%E5%8F%91%E7%9B%AE%E5%BD%95/" title="Android App开发 知识目录"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Android App开发 知识目录</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/05/26/Android%20App%E5%BC%80%E5%8F%91%E7%9B%AE%E5%BD%95/" title="Android App开发 知识目录"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-05-26</div><div class="title">Android App开发 知识目录</div></div></a></div><div><a href="/2024/05/26/Service/" title="Service"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-05-26</div><div class="title">Service</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/85968512_p0.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Celia</div><div class="author-info__description">咸鱼-要不是生活所迫, 谁愿意卷呢</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">7</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">2</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/1191396761"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AFActivity"><span class="toc-number">1.</span> <span class="toc-text">1、什么是Activity</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81Activity%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">2.</span> <span class="toc-text">2、Activity的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9A%84%E5%87%A0%E7%A7%8D%E5%B8%B8%E8%A7%81%E6%83%85%E5%86%B5"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 生命周期的几种常见情况</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E5%88%87%E6%8D%A2%E6%A8%AA%E7%AB%96%E5%B1%8F%E6%97%B6%EF%BC%8CActivity%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E5%8F%98%E5%8C%96"><span class="toc-number">3.</span> <span class="toc-text">3、切换横竖屏时，Activity的生命周期变化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%AD%A3%E5%B8%B8%E6%83%85%E5%86%B5"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 正常情况</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E9%85%8D%E7%BD%AE-android-configChanges"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 配置 android:configChanges</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81Activity%E7%9A%84%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.</span> <span class="toc-text">4、Activity的启动模式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E5%9B%9B%E5%A4%A7%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 四大启动模式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Standard-%E6%A0%87%E5%87%86%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.1.1.</span> <span class="toc-text">Standard 标准模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#singleTop-%E6%A0%88%E9%A1%B6%E5%A4%8D%E7%94%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.1.2.</span> <span class="toc-text">singleTop 栈顶复用模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#singleTask-%E6%A0%88%E5%86%85%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.1.3.</span> <span class="toc-text">singleTask 栈内单例模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SingleInstance-%E5%A0%86%E5%86%85%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.1.4.</span> <span class="toc-text">SingleInstance 堆内单例模式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E8%BF%9B%E9%98%B6%E9%A2%98%EF%BC%9A%E8%B0%88%E8%B0%88%E5%9B%9B%E5%A4%A7%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F%E5%AF%B9%E5%BA%94%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 进阶题：谈谈四大启动模式对应的使用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 如何设置启动模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%83%8C%E9%9D%A2%E8%AF%95%E9%A2%98%E7%89%88%E6%9C%AC"><span class="toc-number">5.</span> <span class="toc-text">背面试题版本</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-Activity%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">5.0.1.</span> <span class="toc-text">1. Activity是什么?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">5.0.2.</span> <span class="toc-text">2. 生命周期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%9B%9B%E5%A4%A7%E5%90%AF%E5%8A%A8%E6%A8%A1%E5%BC%8F"><span class="toc-number">5.0.3.</span> <span class="toc-text">3. 四大启动模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E9%9D%A2%E8%AF%95%E9%A2%981-%E6%A8%AA%E7%AB%96%E5%B1%8F"><span class="toc-number">5.0.4.</span> <span class="toc-text">4. 面试题1: 横竖屏</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E9%9D%A2%E8%AF%95%E9%A2%982-%E4%BB%8EActivity-A%E8%B7%B3%E8%BD%AC%E5%88%B0Activity-B-%E6%89%80%E8%B5%B0%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-number">5.0.5.</span> <span class="toc-text">5. 面试题2: 从Activity A跳转到Activity B, 所走的生命周期</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/26/Service/" title="Service">Service</a><time datetime="2024-05-25T20:00:42.000Z" title="发表于 2024-05-26 04:00:42">2024-05-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/26/Activity/" title="Android">Android</a><time datetime="2024-05-25T20:00:18.000Z" title="发表于 2024-05-26 04:00:18">2024-05-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/05/26/Android%20App%E5%BC%80%E5%8F%91%E7%9B%AE%E5%BD%95/" title="Android App开发 知识目录">Android App开发 知识目录</a><time datetime="2024-05-25T19:48:48.000Z" title="发表于 2024-05-26 03:48:48">2024-05-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/18/%E6%80%8E%E4%B9%88%E8%8E%B7%E5%8F%96%E6%89%A7%E8%A1%8C%E5%8A%9B/" title="怎么获取执行力">怎么获取执行力</a><time datetime="2024-04-17T18:05:57.000Z" title="发表于 2024-04-18 02:05:57">2024-04-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/04/17/%E5%A6%82%E4%BD%95%E4%BB%8E%E4%B8%80%E4%B8%AA%E6%89%A7%E8%A1%8C%E5%8A%9B%E5%BC%BA%E7%9A%84%E4%BA%BA%E5%8F%98%E6%88%90%E4%B8%80%E4%B8%AA%E7%AA%9D%E5%9B%8A%E7%9A%84%E4%BA%BA/" title="如何从一个执行力强的人变成一个窝囊的人">如何从一个执行力强的人变成一个窝囊的人</a><time datetime="2024-04-17T04:55:41.000Z" title="发表于 2024-04-17 12:55:41">2024-04-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By Celia</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
